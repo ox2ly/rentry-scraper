@@ -1,0 +1,11 @@
+{
+  "name": "rentry-scraper",
+  "version": "1.0.0",
+  "description": "simple scraper for rentry.co",
+  "main": "scraper.js",
+  "author": "ox2ly",
+  "license": "MIT",
+  "scripts": {
+    "start": "node scraper.js"
+  }
+}
