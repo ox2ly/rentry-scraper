@@ -1,16 +1,3 @@
-function getCurrentTime() {
-  const now = new Date();
-  const options = {
-    year: "numeric",
-    month: "numeric",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-  };
-  return now.toLocaleString("eu", options);
-}
-
 function formatTime(elapsedTime) {
   const days = Math.floor(elapsedTime / (60 * 60 * 24));
   const hours = Math.floor((elapsedTime % (60 * 60 * 24)) / (60 * 60));
@@ -39,6 +26,5 @@ function formatTime(elapsedTime) {
 }
 
 module.exports = {
-  getCurrentTime,
   formatTime,
 };

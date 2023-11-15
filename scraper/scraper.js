@@ -1,8 +1,8 @@
 const fs = require("fs");
 const path = require("path");
-const puppeteer = require("puppeteer");
+const axios = require("axios");
 
-const { formatTime, getCurrentTime } = require("./time");
+const { formatTime } = require("./time");
 const { colorConsole, console_Title } = require("./console");
 const { readFromFile, writeToFile } = require("./file");
 
@@ -40,48 +40,26 @@ async function scrape() {
       continue;
     }
 
-    const url = "https://rentry.co/" + urlID;
+    const url = "https://rentry.co/" + urlID + "/raw";
     const logFile = path.join("./data", `${urlID}.txt`);
 
-    const browser = await puppeteer.launch({ headless: "new" });
-    const page = await browser.newPage();
-    await page.goto(url);
-
-    const textElement = await page.$(".entry-text");
-    const textFound = textElement !== null;
-
-    if (textFound) {
-      const foundText = await page.evaluate(
-        (element) => element.textContent.trim(),
-        textElement
-      );
-
-      const pubDateElement = await page.$(".float-right.text-right");
-      const pubText = pubDateElement
-        ? await page.evaluate(
-            (pubDateElement) => pubDateElement.textContent.trim(),
-            pubDateElement
-          )
-        : "N/A";
-      const dateRegex = /Pub: (.+?)\s+/;
-
-      const pubDate = dateRegex.exec(pubText)?.[1] || "N/A";
-      const completeUrl = page.url();
-      const currentDateTime = getCurrentTime();
+    try {
+      const response = await axios.get(url);
+      const foundText = response.data;
+      const completeUrl = url;
       colorConsole("\x1b[32m", `[VALID] URL: ${completeUrl}`);
       fs.writeFileSync(
         logFile,
-        `ID: ${urlID}\nURL: ${completeUrl}\nTIME: ${currentDateTime}\nPublication Date: ${pubDate}\nText: ${foundText}\n`
+        `URL: ${completeUrl}\nContent ⬇\n\n${foundText}`
       );
       scrapedIds.push(urlID);
       writeToFile(scrapedIdsFile, scrapedIds);
-      await browser.close();
-    } else {
-      colorConsole("\x1b[35m", `[NO TEXT] ID: ${urlID}`);
+    } catch (error) {
+      colorConsole("\x1b[35m", `[NO CONTENT] ID: ${urlID}`);
       notValidIds.push(urlID);
       writeToFile(notValidIdsFile, notValidIds);
-      await browser.close();
     }
+
     const consoleTitle = `Valid: ${scrapedIds.length} | Total Scraped: ${
       scrapedIds.length + notValidIds.length
     } | Elapsed Time: ${formattedElapsedTime}`;

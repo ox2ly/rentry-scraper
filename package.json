@@ -1,6 +1,6 @@
 {
   "name": "rentry-scraper",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "simple scraper for rentry.co",
   "main": "scraper.js",
   "author": "ox2ly",
