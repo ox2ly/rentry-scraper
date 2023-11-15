@@ -40,3 +40,9 @@ Users are solely responsible for ensuring that their use of this scraper complie
 Use this tool responsibly and ethically. The author disclaims any liability for any actions taken by users of this scraper.
 
 
+## TO THE DEVS
+
+If the developers of [rentry.co](https://rentry.co) have concerns or wish to request the removal of this scraper, please contact me at [ox2dev@proton.me](mailto:ox2dev@proton.me).
+
+
+
