@@ -10,6 +10,9 @@ This is a web scraper for [rentry.co](https://rentry.co )
 - [Disclaimer](#disclaimer)
 
 
+## Support
+[Support Server](https://discord.gg/pc4CgYNArN) 
+
 ## Installation
 
 1. Clone the repository:
