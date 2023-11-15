@@ -35,7 +35,7 @@ This is a request-based web scraper for [rentry.co](https://rentry.co).
 
 ## Note
 
-Consider using a [VPN](https://en.wikipedia.org/wiki/Virtual_private_network) when running the scraper.
+Consider using a [VPN](https://en.wikipedia.org/wiki/VPN_service) when running the scraper.
 
 ## Disclaimer
 
